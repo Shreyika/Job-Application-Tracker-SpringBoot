@@ -7,4 +7,5 @@ import com.study.jobapplicationtracker.entities.User;
 
 public interface UserRepository extends JpaRepository<User, String>{
 
+	boolean existsByEmail(String email);
 }
