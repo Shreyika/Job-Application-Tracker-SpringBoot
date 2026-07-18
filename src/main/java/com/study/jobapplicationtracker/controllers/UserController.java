@@ -1,5 +1,6 @@
 package com.study.jobapplicationtracker.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.study.jobapplicationtracker.repositories.UserRepository;
 import com.study.jobapplicationtracker.dtos.UserDto;
 import com.study.jobapplicationtracker.services.UserService;
+
 
 import jakarta.validation.Valid;
 
@@ -21,9 +24,17 @@ import jakarta.validation.Valid;
 @CrossOrigin
 public class UserController {
 	
+	@Autowired
 	private UserService userService;
 	
-	@PostMapping("/register")
+	
+	private UserRepository userRepository;
+	
+	UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+	
+	@PostMapping
 	public ResponseEntity<UserDto> registerUser(@Valid @RequestBody UserDto userDto)
 	{
 		UserDto registerUser = userService.registerUser(userDto);

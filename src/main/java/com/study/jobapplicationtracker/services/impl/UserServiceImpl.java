@@ -1,12 +1,14 @@
 package com.study.jobapplicationtracker.services.impl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.study.jobapplicationtracker.dtos.UserDto;
 import com.study.jobapplicationtracker.entities.User;
 import com.study.jobapplicationtracker.repositories.UserRepository;
 import com.study.jobapplicationtracker.services.UserService;
 
+@Service
 public class UserServiceImpl implements UserService{
 
 	@Autowired
@@ -19,7 +21,6 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public UserDto registerUser(UserDto userDto) {
 		User user = modelMapper.map(userDto, User.class);
-		
 		userRepository.save(user);
 		return modelMapper.map(user,UserDto.class);
 	}

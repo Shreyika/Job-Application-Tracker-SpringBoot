@@ -54,7 +54,7 @@ public class JobsDto {
 	
 	@NotNull
 	@NotBlank
-	private String vacancy;
+	private Integer vacancy;
 	
 	@NotNull
 	@NotBlank

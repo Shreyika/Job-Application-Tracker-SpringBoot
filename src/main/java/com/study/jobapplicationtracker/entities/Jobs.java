@@ -46,7 +46,7 @@ public class Jobs {
 	private Integer ctcMax;
 	
 	@Column(nullable = false)
-	private String vacancy;
+	private Integer vacancy;
 	
 	@Column(nullable = false)
 	private String jobStatus;

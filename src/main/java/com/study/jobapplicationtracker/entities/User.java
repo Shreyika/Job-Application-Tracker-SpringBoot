@@ -1,7 +1,11 @@
 package com.study.jobapplicationtracker.entities;
 
+import com.study.jobapplicationtracker.enums.Role;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,8 +20,8 @@ import lombok.NoArgsConstructor;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.UUID)
-	private String id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 	
 	@Column(nullable=false, name="fname")
 	private String firstName;
@@ -30,4 +34,7 @@ public class User {
 	
 	@Column(nullable=false)
 	private String password;
+	
+	@Enumerated(EnumType.STRING)
+	private Role role;
 }

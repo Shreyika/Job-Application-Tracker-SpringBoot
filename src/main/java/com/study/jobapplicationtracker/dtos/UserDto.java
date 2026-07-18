@@ -1,5 +1,7 @@
 package com.study.jobapplicationtracker.dtos;
 
+import com.study.jobapplicationtracker.enums.Role;
+
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -15,7 +17,7 @@ import lombok.NoArgsConstructor;
 
 public class UserDto {
 
-	private String id;
+	private Integer id;
 	
 	@Size(min = 2, max = 60)
 	@NotNull(message = "firstname can't be null")
@@ -33,4 +35,6 @@ public class UserDto {
 	private String password;
 	
 	private String confirmPassword;
+	
+	private Role role;
 }
