@@ -6,7 +6,7 @@ import com.study.jobapplicationtracker.dtos.JobsDto;
 
 public interface JobsService {
 
-	JobsDto addJobs(JobsDto jobsDto);
+	JobsDto addJobs(JobsDto jobsDto,int recruiterId);
 	
 	List<JobsDto> getJobs();
 	

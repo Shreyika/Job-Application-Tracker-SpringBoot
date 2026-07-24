@@ -11,6 +11,7 @@ import com.study.jobapplicationtracker.dtos.RecruiterDto;
 import com.study.jobapplicationtracker.entities.Jobs;
 import com.study.jobapplicationtracker.entities.Recruiter;
 import com.study.jobapplicationtracker.entities.User;
+import com.study.jobapplicationtracker.enums.Role;
 import com.study.jobapplicationtracker.repositories.RecruiterRepository;
 import com.study.jobapplicationtracker.repositories.UserRepository;
 import com.study.jobapplicationtracker.services.RecruiterService;
@@ -31,6 +32,10 @@ public class RecruiterServiceImpl implements RecruiterService {
 		
 		User user = userRepository.findById(userId)
 		.orElseThrow(()->new RuntimeException("user not found"));
+		
+		//assigning role
+		//user.setRole(Role.ROLE_RECRUITER);
+		//User savedUser=userRepository.save(user);;
 		
 		//need to ask what this line does
 		Recruiter recruiter = modelMapper.map(recruiterDto, Recruiter.class);

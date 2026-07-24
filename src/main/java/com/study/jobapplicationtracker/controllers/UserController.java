@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.study.jobapplicationtracker.repositories.UserRepository;
 import com.study.jobapplicationtracker.dtos.UserDto;
+import com.study.jobapplicationtracker.enums.Role;
 import com.study.jobapplicationtracker.services.UserService;
 
 
@@ -35,9 +36,9 @@ public class UserController {
     }
 	
 	@PostMapping
-	public ResponseEntity<UserDto> registerUser(@Valid @RequestBody UserDto userDto)
+	public ResponseEntity<UserDto> registerUser(@Valid @RequestBody UserDto userDto, @RequestParam Role role)
 	{
-		UserDto registerUser = userService.registerUser(userDto);
+		UserDto registerUser = userService.registerUser(userDto, role);
 		return new ResponseEntity<UserDto>(registerUser, HttpStatus.CREATED);
 	}
 	

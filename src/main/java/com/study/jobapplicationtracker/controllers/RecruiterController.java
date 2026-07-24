@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.study.jobapplicationtracker.dtos.RecruiterDto;
+import com.study.jobapplicationtracker.enums.Role;
 import com.study.jobapplicationtracker.repositories.JobsRepository;
 import com.study.jobapplicationtracker.repositories.RecruiterRepository;
 import com.study.jobapplicationtracker.services.RecruiterService;
@@ -27,15 +29,11 @@ import com.study.jobapplicationtracker.services.RecruiterService;
 @CrossOrigin
 public class RecruiterController {
 
+	@Autowired
 	private RecruiterRepository recruiterRepository;
 	
 	@Autowired
 	private RecruiterService recruiterService;
-	
-	RecruiterController(RecruiterRepository recruiterRepository)
-	{
-		this.recruiterRepository=recruiterRepository;
-	}
 	
 // POST - localhost:8080/recruiters/register/{userId}
 	//http://localhost:8080/recruiters/register/1

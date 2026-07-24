@@ -22,9 +22,11 @@ public class JobsServiceImpl implements JobsService{
 	private JobsRepository jobsRepository;
 	
 	@Override
-	public JobsDto addJobs(JobsDto jobsDto) {
+	public JobsDto addJobs(JobsDto jobsDto,int recruiterId) {
 		
 		Jobs jobs = modelMapper.map(jobsDto, Jobs.class);
+		
+		//jobs.se
 		
 		Jobs savedJobs = jobsRepository.save(jobs);
 		

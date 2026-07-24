@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.study.jobapplicationtracker.dtos.JobsDto;
+import com.study.jobapplicationtracker.entities.User;
 import com.study.jobapplicationtracker.repositories.JobsRepository;
 import com.study.jobapplicationtracker.services.JobsService;
 
@@ -30,23 +32,26 @@ import jakarta.validation.Valid;
 @CrossOrigin
 public class JobsController {
 	
-	private final JobsRepository jobsRepository;
+	@Autowired
+	private  JobsRepository jobsRepository;
 	
 	@Autowired
 	private JobsService jobsService;
 	
-	JobsController(JobsRepository jobsRepository)
-	{
-		this.jobsRepository=jobsRepository;
-	}
+//	JobsController(JobsRepository jobsRepository)
+//	{
+//		this.jobsRepository=jobsRepository;
+//	}
 	
 //	-----------------------------------------------------
 //	 POST - localhost:8080/products
 //
 	@PostMapping
-	public ResponseEntity<JobsDto> addJobs(@Valid @RequestBody JobsDto jobs)
+	public ResponseEntity<JobsDto> addJobs(@Valid @RequestBody JobsDto jobs,@AuthenticationPrincipal User user) //@AuthenticationPrincipal User user
 	{
-		return new ResponseEntity<JobsDto>(jobsService.addJobs(jobs),HttpStatus.CREATED);
+		//		return new ResponseEntity<JobsDto>(jobsService.addJobs(jobs,user.getRecruiter().getRecruiterId()),HttpStatus.CREATED);
+
+		return new ResponseEntity<JobsDto>(jobsService.addJobs(jobs, user.getId()),HttpStatus.CREATED);
 	}
 	
 //	GET - localhost:8080/jobs	
