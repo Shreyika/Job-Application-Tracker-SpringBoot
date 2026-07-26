@@ -1,14 +1,18 @@
 package com.study.jobapplicationtracker.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -60,6 +64,10 @@ public class Jobs {
 	
 	@Column(nullable = false)
 	private String experienceRequired;
+	
+	@OneToMany(mappedBy = "job")
+	@JsonIgnore
+	private List<Application> applications;
 	
 	
 	

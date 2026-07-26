@@ -99,4 +99,14 @@ public class CandidateServiceImpl implements CandidateService{
 		
 	}
 	
+	@Override
+	public void updateResume(Integer userId, String resumeUrl) {
+
+	    Candidate candidate = candidateRepository.findById(userId)
+	            .orElseThrow(() -> new RuntimeException("Candidate not found"));
+
+	    candidate.setResumeURL(resumeUrl);
+
+	    candidateRepository.save(candidate);
+	}
 }

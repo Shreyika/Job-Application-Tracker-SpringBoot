@@ -45,9 +45,14 @@ public class SecurityConfig {
 		request
 		.requestMatchers(HttpMethod.GET,"/products/**","/categories","/jobs").permitAll()
 		.requestMatchers(HttpMethod.POST,"/users","/auth/login","/recruiters/register/**","/candidates/register/**").permitAll()
-		.requestMatchers(HttpMethod.POST,"/recruiters","/candidates").hasRole("RECRUITER")
+		.requestMatchers(HttpMethod.POST,"/recruiters","/candidates","/jobs/**").hasRole("RECRUITER")
 		.requestMatchers(HttpMethod.DELETE,"/recruiters/**","/categories/**").hasRole("RECRUITER") //  "/**" because delete url is /products/2, /3
 		.requestMatchers(HttpMethod.PUT,"/recruiters/**","/candidates/**").hasRole("RECRUITER")
+		.requestMatchers(HttpMethod.POST,"/applications/**").hasRole("CANDIDATE")
+		.requestMatchers(HttpMethod.GET,"/applications/job/**").hasRole("CANDIDATE")
+		.requestMatchers(HttpMethod.PUT,"/applications/**").hasRole("CANDIDATE")
+		.requestMatchers(HttpMethod.DELETE,"/applications/**").hasRole("CANDIDATE")
+		
 		.anyRequest().authenticated()
 		);
 		

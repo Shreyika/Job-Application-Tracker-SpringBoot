@@ -17,5 +17,7 @@ public interface CandidateService {
 	
 	void deleteCandidate(Integer id);
 	
+	void updateResume(Integer userId, String resumeUrl);
+	
 	
 }

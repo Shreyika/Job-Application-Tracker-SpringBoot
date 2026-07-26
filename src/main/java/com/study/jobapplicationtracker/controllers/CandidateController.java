@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +16,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.study.jobapplicationtracker.dtos.CandidateDto;
+import com.study.jobapplicationtracker.entities.User;
 import com.study.jobapplicationtracker.repositories.CandidateRepository;
 import com.study.jobapplicationtracker.services.CandidateService;
+import com.study.jobapplicationtracker.services.FileService;
 
 @RestController
 @RequestMapping("/candidates")
@@ -30,6 +35,8 @@ public class CandidateController {
 	private CandidateRepository candidateRepository;
 	@Autowired
 	private CandidateService candidateService;
+	@Autowired
+	private FileService fileService;
 	
 	//localhost:8080/candidates/register/1
 	@PostMapping("/register/{userId}")
@@ -67,6 +74,18 @@ public class CandidateController {
 			HashMap<String, String> response = new HashMap<String, String>();
 			response.put("message", "candidate deleted");
 			return ResponseEntity.ok(response);
+		}
+		
+		@PutMapping("/resume")
+		public ResponseEntity<String> uploadResume(
+		        @RequestParam("resume") MultipartFile resume,
+		        @AuthenticationPrincipal User user){
+
+		    String resumeUrl = fileService.uploadResume(resume);
+
+		    candidateService.updateResume(user.getId(), resumeUrl);
+
+		    return ResponseEntity.ok("Resume updated successfully");
 		}
 	
 }

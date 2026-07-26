@@ -32,7 +32,6 @@ public class JobsDto {
 	
 	@NotNull
 	@NotBlank
-	@Column(nullable = false,length = 60)
 	private String companyName;
 	
 	@NotNull
@@ -45,15 +44,13 @@ public class JobsDto {
 	private String jobType;
 	
 	@NotNull
-	@Positive
+	
 	private Integer ctcMin;
 	
 	@NotNull
-	@Positive
 	private Integer ctcMax;
 	
 	@NotNull
-	@NotBlank
 	private Integer vacancy;
 	
 	@NotNull
@@ -61,7 +58,6 @@ public class JobsDto {
 	private String jobStatus;
 	
 	@NotNull
-	
 	private LocalDate deadlineToApply;
 	
 	
