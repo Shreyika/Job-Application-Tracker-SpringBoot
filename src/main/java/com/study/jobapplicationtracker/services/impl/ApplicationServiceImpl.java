@@ -54,23 +54,32 @@ public class ApplicationServiceImpl implements ApplicationService{
 	    Jobs job = jobsRepository.findById(jobId)
 	            .orElseThrow(() -> new RuntimeException("Job not found"));
 
+	    
+
+	    if(applicationRepository
+	    		.existsByCandidate_CandidateIdAndJob_Id(
+	    		        candidate.getCandidateId(),
+	    		        job.getId()
+	    		)) {
+	    		    throw new RuntimeException("You have already applied for this job.");
+	    		}
+
+
 	    String resumeUrl;
 
 	    if (resume != null && !resume.isEmpty()) {
 
-	        // Candidate uploaded a new resume
 	        resumeUrl = fileService.uploadResume(resume);
 
 	    } else {
 
-	        // Use default resume
 	        resumeUrl = candidate.getResumeURL();
 
 	        if (resumeUrl == null || resumeUrl.isBlank()) {
 	            throw new RuntimeException("Please upload a resume before applying.");
 	        }
 	    }
-
+	    
 	    Application application = new Application();
 
 	    application.setCandidate(candidate);

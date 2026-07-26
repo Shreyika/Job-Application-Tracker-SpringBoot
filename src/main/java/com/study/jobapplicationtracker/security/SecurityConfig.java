@@ -49,7 +49,7 @@ public class SecurityConfig {
 		.requestMatchers(HttpMethod.DELETE,"/recruiters/**","/categories/**").hasRole("RECRUITER") //  "/**" because delete url is /products/2, /3
 		.requestMatchers(HttpMethod.PUT,"/recruiters/**","/candidates/**").hasRole("RECRUITER")
 		.requestMatchers(HttpMethod.POST,"/applications/**").hasRole("CANDIDATE")
-		.requestMatchers(HttpMethod.GET,"/applications/job/**").hasRole("CANDIDATE")
+		.requestMatchers(HttpMethod.GET,"/applications/job/**", "/applications/my").hasRole("CANDIDATE")
 		.requestMatchers(HttpMethod.PUT,"/applications/**").hasRole("CANDIDATE")
 		.requestMatchers(HttpMethod.DELETE,"/applications/**").hasRole("CANDIDATE")
 		

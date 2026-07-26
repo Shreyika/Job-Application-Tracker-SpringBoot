@@ -10,7 +10,10 @@ import com.study.jobapplicationtracker.entities.Jobs;
 
 public interface ApplicationRepository extends JpaRepository<Application, Integer>{
 
-	boolean existsByCandidateAndJob(Candidate candidate, Jobs job);
+	boolean existsByCandidate_CandidateIdAndJob_Id(
+	        Integer candidateId,
+	        Integer jobId
+	);
 
 	List<Application> findByCandidate(Candidate candidate);
 
